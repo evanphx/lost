@@ -1,5 +1,10 @@
 #include "ruby.h"
+
+#ifdef RUBY_19
+#include "ruby/intern.h"
+#else
 #include "intern.h"
+#endif
 
 int int_coreloc_enable();
 void int_coreloc_get(double* lat, double* log);

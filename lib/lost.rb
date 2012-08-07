@@ -1,7 +1,7 @@
-require 'lost/lost.so'
+require 'lost.so'
 
 module Lost
-  VERSION = "1.0.0"
+  VERSION = "1.0.1"
 
   coreloc_enable
 end
