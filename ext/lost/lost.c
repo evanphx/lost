@@ -7,7 +7,7 @@
 #endif
 
 int int_coreloc_enable();
-void int_coreloc_get(double* lat, double* log);
+int int_coreloc_get(double* lat, double* log);
 
 VALUE coreloc_enable(VALUE r_self) {
   if(int_coreloc_enable()) {
@@ -20,7 +20,9 @@ VALUE coreloc_enable(VALUE r_self) {
 VALUE coreloc_pos(VALUE r_self) {
   double lat, log;
 
-  int_coreloc_get(&lat, &log);
+  if(!int_coreloc_get(&lat, &log)) {
+    return Qnil;
+  }
 
   return rb_ary_new3(2, rb_float_new(lat),
                         rb_float_new(log));

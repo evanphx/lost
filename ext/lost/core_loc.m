@@ -14,8 +14,11 @@
 @interface LLHolder : NSObject {
   double latitude;
   double longitude;
+  int worked;
 }
 
+- (void)reset;
+- (int)useData;
 - (void)latitude:(double*)lat longitude:(double*)log;
 
 - (void)logLonLat:(CLLocation*)location;
@@ -25,6 +28,17 @@
 @end
 
 @implementation LLHolder
+
+- (void)reset
+{
+  worked = 0;
+}
+
+- (int)useData
+{
+  return worked;
+}
+
 - (void)latitude:(double*)lat longitude:(double*)log
 {
   *lat = latitude;
@@ -33,6 +47,7 @@
 
 - (void)logLonLat:(CLLocation*)location
 {
+    worked = 1;
     CLLocationCoordinate2D coordinate = location.coordinate;
     latitude = coordinate.latitude;
     longitude = coordinate.longitude;
@@ -47,7 +62,7 @@
     [pool drain];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
   latitude = 0.0;
   longitude = 0.0;
   CFRunLoopStop(CFRunLoopGetCurrent());
@@ -65,16 +80,23 @@ int int_coreloc_enable() {
   return 0;
 }
 
-void int_coreloc_get(double* lat, double* log) {
+int int_coreloc_get(double* lat, double* log) {
   LLHolder* obj = [[LLHolder alloc] init];
 	[g_lm setDelegate:obj];
 	[g_lm startUpdatingLocation];
 
   CFRunLoopRun();
 
-  [obj release];
+  [g_lm stopUpdatingLocation];
 
-  [obj latitude: lat longitude: log];
+  if([obj useData] == 1) {
+    [obj latitude: lat longitude: log];
+    [obj release];
+    return 1;
+  }
+
+  [obj release];
+  return 0;
 }
 
 // int main(int ac,char *av[])
