@@ -1,26 +1,27 @@
 = lost
 
-* FIX (url)
+* http://github.com/evanphx/lost
 
 == DESCRIPTION:
 
-FIX (describe your package)
+Find where you are with CoreLocation!
 
 == FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
+* Uses OS X's CoreLocation to provide the current latitude and longitude
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
+  require 'lost'
+  p Lost.current_position
 
 == REQUIREMENTS:
 
-* FIX (list of requirements)
+* CoreLocation to work (wifi hotspots around)
 
 == INSTALL:
 
-* FIX (sudo gem install, anything else)
+* gem install lost
 
 == DEVELOPERS:
 
@@ -35,7 +36,7 @@ and generate the RDoc.
 
 (The MIT License)
 
-Copyright (c) 2012 FIX
+Copyright (c) 2012 Evan Phoenix
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

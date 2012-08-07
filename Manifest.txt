@@ -3,6 +3,8 @@ History.txt
 Manifest.txt
 README.txt
 Rakefile
-bin/current/location
-lib/current/location.rb
-test/test_current/location.rb
+bin/lost
+ext/lost/core_loc.m
+ext/lost/extconf.rb
+ext/lost/lost.c
+lib/lost.rb
