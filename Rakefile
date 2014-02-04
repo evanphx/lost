@@ -14,4 +14,6 @@ Hoe.spec 'lost' do
   end
 end
 
+task :test => :compile
+
 # vim: syntax=ruby
